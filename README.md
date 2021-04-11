@@ -140,7 +140,7 @@
 
 ### Database Modeling :link:
 
-![ERD](./document/img/ERD.png)
+![ERD](./document/img/erd.png)
 
 
 
