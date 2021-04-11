@@ -135,13 +135,13 @@
 - Backend : Spring Boot, Django, MariaDB
 - Frontend : Vue.js
 
-![image](/uploads/5b788ee36c740c2adbdcbcc78fa569a7/image.png)
+![기술스택](./document/img/기술스택.png)
 
 
 
 ### Database Modeling :link:
 
-![image](/uploads/f3b7b3bc1348160f884823b1186bd184/image.png)
+![ERD](./document/img/ERD.png)
 
 
 
@@ -165,6 +165,7 @@
 ```
 - 해당 레시피에 포함된 유저의 알레르기 정보 알림
 - 레시피를 찜해 놓고 모아볼 수 있는 기능
+- 레시피 제목 검색 기능
 - 최근에 본 레시피 확인 가능
 - 해당 레시피를 보고 유저가 만든 음식 사진 게시 기능
 - 타유저들이 게시한 음식 사진 모아보기 기능
@@ -185,34 +186,34 @@
 
 - ##### Survey
 
-  ![취향조사](/uploads/600193d116666ca0fa3dc337a445d341/취향조사.gif)
+  ![취향조사](./document/gif/취향조사.gif)
 - ##### Main
 
-  ![메인화면](/uploads/70803c76aac1daa139723fa0ca8dd08f/메인화면.gif)
+  ![메인화면](./document/gif/메인화면.gif)
 
   
 
 - ##### Recipe Detail
 
-  ![레시피_상세](/uploads/b975ec8ad5da02ede9100bbf5674bf37/레시피_상세.gif)
+  ![레시피_상세](./document/gif/레시피 상세.gif)
 
   
 
 - ##### Review
 
-  ![리뷰_모아보기](/uploads/123659d2da8190885fd68416ed0f0051/리뷰_모아보기.gif)
+  ![리뷰_모아보기](./document/gif/리뷰 모아보기.gif)
 
   
 
 - ##### MyPage(My Review & Like)
 
-  ![리뷰_찜](/uploads/1bc248758e825f52e09be527d7284b0d/리뷰_찜.gif)
+  ![리뷰_찜](./document/gif/리뷰 찜.gif)
 
   
 
 - ##### Cook Video
 
-  ![유튜브](/uploads/e0e5aa2d4841acd54d59da1a8c96aa01/유튜브.gif)
+  ![유튜브](./document/gif/유튜브.gif)
 
 ### Recipe Source 📕
 
