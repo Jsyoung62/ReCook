@@ -3,7 +3,6 @@
 > #### Welcome to 👉 [Recook](http://j4a204.p.ssafy.io/) 👈
 > size : Responsive(387 x 858)
 
-
 <br>
 
 ## Project Summary 🧭
@@ -195,19 +194,19 @@
 
 - ##### Recipe Detail
 
-  ![레시피_상세](./document/gif/레시피 상세.gif)
+  ![레시피_상세](./document/gif/레시피상세.gif)
 
   
 
 - ##### Review
 
-  ![리뷰_모아보기](./document/gif/리뷰 모아보기.gif)
+  ![리뷰_모아보기](./document/gif/리뷰모아보기.gif)
 
   
 
 - ##### MyPage(My Review & Like)
 
-  ![리뷰_찜](./document/gif/리뷰 찜.gif)
+  ![리뷰_찜](./document/gif/리뷰찜.gif)
 
   
 
