@@ -46,8 +46,6 @@ def allergy_remove(recommend_list, small_id_list):
             for b in small_id_list:
                 # 레시피 재료와 알레르기 재료가 같다면
                 if(b == a.small_id):
-                    print("알레르기")
-                    print(b)
                     flag = False
                     break
             if(flag == False):
@@ -76,17 +74,17 @@ def weighted_rating(x):
     return (v / (v+m) * R) + (m / (m + v) * C)
 
 
-def get_recommend_movie_list(df, gerne_c_sim, keyword_c_sim, movie_title, top=30):
+def get_recommend_recipe_list(df, gerne_c_sim, keyword_c_sim, recipe_title, top=30):
     # 특정 영화와 비슷한 영화를 추천해야 하기 때문에 '특정 영화' 정보를 뽑아낸다.
-    target_movie_index = df[df['title'] == movie_title].index.values
+    target_recipe_index = df[df['title'] == recipe_title].index.values
 
     # 코사인 유사도 중 비슷한 코사인 유사도를 가진 정보를 뽑아낸다.
-    sim_index = gerne_c_sim[target_movie_index, :top].reshape(-1)
-    sim_index_keyword = keyword_c_sim[target_movie_index, :top].reshape(-1)
+    sim_index = gerne_c_sim[target_recipe_index, :top].reshape(-1)
+    sim_index_keyword = keyword_c_sim[target_recipe_index, :top].reshape(-1)
     # 본인을 제외
-    sim_index = sim_index[sim_index != target_movie_index]
+    sim_index = sim_index[sim_index != target_recipe_index]
     sim_index_keyword = sim_index_keyword[sim_index_keyword !=
-                                          target_movie_index]
+                                          target_recipe_index]
     # data frame으로 만들고 vote_count으로 정렬한 뒤 return
     result = df.iloc[sim_index].sort_values('score', ascending=False)[:5]
     result2 = df.iloc[sim_index_keyword].sort_values(
@@ -99,7 +97,6 @@ def get_recommend_movie_list(df, gerne_c_sim, keyword_c_sim, movie_title, top=30
 def similar_recommend(title, userid):
 
     data = dao.recipe_test()
-    # data = pd.read_csv('C:/Users/multicampus/Desktop/real_recipe.csv',encoding='cp949')
 
     data = data[['id', 'genres', 'vote_average',
                  'vote_count', 'title',  'keywords']]
@@ -112,7 +109,6 @@ def similar_recommend(title, userid):
 
     data['score'] = data.apply(weighted_rating, axis=1)
 
-    # data.to_csv('C:/Users/multicampus/Desktop/real_recipe_new.csv', index = False,encoding='utf-8-sig')
     count_vector = CountVectorizer(ngram_range=(1, 3))
 
     c_vector_genres = count_vector.fit_transform(data['genres'])
@@ -124,16 +120,11 @@ def similar_recommend(title, userid):
     keyword_c_sim = cosine_similarity(
         c_vector_keywords, c_vector_keywords).argsort()[:, ::-1]
 
-    result = get_recommend_movie_list(
-        data, gerne_c_sim, keyword_c_sim, movie_title=title)
+    result = get_recommend_recipe_list(
+        data, gerne_c_sim, keyword_c_sim, recipe_title=title)
 
     small_id_list = allergy_list(userid)
-    # print('알레르기 리스트')
-    # print(small_id_list)
 
     real_result = allergy_remove(result, small_id_list)
-
-    print(data[data['title'] == title])
-    # print(real_result)
 
     return real_result
