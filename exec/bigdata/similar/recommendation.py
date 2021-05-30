@@ -25,9 +25,6 @@ from .models import Food
 from . import Similar
 import random
 
-# movies데이터 갖고오기
-
-
 def recipe_list():
     recipe_list = {}
     recipe_list['recipeId'] = []
@@ -45,8 +42,6 @@ def recipe_list():
     return DataFrame(recipe_list)
 
 # rating데이터 갖고오기
-
-
 def rating_list():
     rating_list = {}
     rating_list['userId'] = []
@@ -92,8 +87,6 @@ def allergy_remove(recommend_list, small_id_list):
             for b in small_id_list:
                 # 레시피 재료와 알레르기 재료가 같다면
                 if(b == a.small_id):
-                    print("알레르기")
-                    print(b)
                     flag = False
                     break
             if(flag == False):
@@ -128,9 +121,7 @@ def check(user_id):
     #3개 미만이면 content based filtering
     else:
         foodLike = FoodLike.objects.filter(user=user_id).values()
-        print(len(foodLike))
         num = random.randrange(0, len(foodLike))
-        print(num)
         food = Food.objects.filter(food_id=foodLike[num]['food_id']).values()
         recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
 
@@ -145,8 +136,6 @@ def recommend(title, user_id):
     recipe_data = recipe_list()
     rating_data = rating_list()
 
-    # print(rating_data)
-
     user_recipe_rating = pd.merge(rating_data, recipe_data, on='recipeId')
 
     recipe_user_rating = user_recipe_rating.pivot_table(
@@ -158,22 +147,14 @@ def recommend(title, user_id):
 
     item_based_collabor = cosine_similarity(recipe_user_rating)
 
-    # print(recipe_user_rating)
-
     item_based_collabor = pd.DataFrame(
         data=item_based_collabor, index=recipe_user_rating.index, columns=recipe_user_rating.index)
 
-    # print(item_based_collabor)
-
     result = item_based_collabor[title].sort_values(ascending=False)[1:11]
-
-    # print(result)
 
     # 유저 알레르기에 포함되는 재료 뽑기
     small_id_list = allergy_list(user_id)
-    # print(small_id_list)
 
     # 레시피중 알러지 포함 레시피 제거하기
     real_result = allergy_remove(result, small_id_list)
-    # print(real_result)
     return real_result
